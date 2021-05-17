@@ -70,7 +70,7 @@ function Createmodal ({ classes, toggle, className, modal, setModal, enqueueSnac
   useEffect(() => {
     catID.length <= 0 || subID.length <= 0 || classID.length <= 0 
     || productName.length <= 0  || price <= 0 || definition.length <= 0 
-    || !preview || !imgData || !selectedFile || filter.length === 0 || amount <= 0 ? setDisabled(true) : setDisabled(false)
+    || !preview || !imgData || !selectedFile || amount <= 0 ? setDisabled(true) : setDisabled(false)
   }, [ 
       catID,
       subID,
@@ -81,8 +81,7 @@ function Createmodal ({ classes, toggle, className, modal, setModal, enqueueSnac
       preview,
       amount,
       imgData,
-      selectedFile,
-      filter
+      selectedFile
   ])
 
   useEffect(() => {
