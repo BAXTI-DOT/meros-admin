@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { gql, useQuery, useMutation } from '@apollo/client'
 import { useSnackbar } from 'notistack'
 import PaperComponent from '../../modals/Papercomponent'
@@ -52,7 +52,6 @@ function Filter(props) {
   const [ modal3, setModal3] = useState(false);
   const [ categoryID ] = useState("")
   const [ subcategoryID, setSubcategoryID ] = useState("")
-  const [ catID ] = useState("")
   const [ open, setOpen ] = useState(false)
   const [ deletingId, setDeletingId ] = useState("")
   const [ variant ] = useState("success")
@@ -72,8 +71,6 @@ function Filter(props) {
   const { data: subData } = useQuery(ALL_SUBCATEGORIES, {
     variables: { categoryID }
   })
-
-  console.log(subData)
 
   const { data: filters } = useQuery(FILTERS, {
       variables: { subcategoryID }
@@ -119,7 +116,11 @@ function Filter(props) {
     setOpen(false);
   };
 
-  if(!token) window.location.href = '/login'
+  useEffect(() => {
+		if(!token) {
+			window.location.href = '/login'
+		}
+	}, [token])
 
   return (
     <>

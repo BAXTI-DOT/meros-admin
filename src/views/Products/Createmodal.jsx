@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useQuery } from '@apollo/client'
 import { storage } from '../../firebase'
 import { v4 as uuidv4 } from 'uuid';
+import { useLogin } from 'contexts/Auth'
 
 import {
     Col,
@@ -50,6 +51,7 @@ function Createmodal ({ classes, toggle, className, modal, setModal, enqueueSnac
   const [ imgData, setImgData] = useState("")
   const [ variant ] = useState("success")
   const [ errorVariant ] = useState("danger")
+  const [ token ] = useLogin()
 
   const { data: allCategories } = useQuery(ALL_CATEGORIES)
 
@@ -65,8 +67,6 @@ function Createmodal ({ classes, toggle, className, modal, setModal, enqueueSnac
     variables: { subcategoryID: subID }
   })
 
-  console.log(filter)
-  
   useEffect(() => {
     catID.length <= 0 || subID.length <= 0 || classID.length <= 0 
     || productName.length <= 0  || price <= 0 || definition.length <= 0 
@@ -81,7 +81,8 @@ function Createmodal ({ classes, toggle, className, modal, setModal, enqueueSnac
       preview,
       amount,
       imgData,
-      selectedFile
+      selectedFile,
+      filter
   ])
 
   useEffect(() => {
@@ -132,7 +133,7 @@ function Createmodal ({ classes, toggle, className, modal, setModal, enqueueSnac
     const submitForm = (e) => {
         e.preventDefault()
 
-        axios.post('http://localhost:4000/new-product', {
+        axios.post('https://meros-master.herokuapp.com/new-product', {
             data: {
                 categoryID: catID,
                 subcategoryID: subID,
@@ -162,6 +163,12 @@ function Createmodal ({ classes, toggle, className, modal, setModal, enqueueSnac
             enqueueSnackbar("Error while creating product", { variant: errorVariant})
         })
     }
+
+    useEffect(() => {
+		if(!token) {
+			window.location.href = '/login'
+		}
+	}, [token])
 
     return (
         <Modal isOpen={modal} toggle={toggle} className={className}>

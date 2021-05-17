@@ -40,10 +40,6 @@ function Tables(props) {
   const [ deleteingId, setDeletingId ] = useState('')
   const [ token ] = useLogin()
 
-  useEffect(() => {
-    if(!token) window.location.href = '/login'
-  }, [token])
-
   const { enqueueSnackbar } = useSnackbar()
 
   const {
@@ -109,6 +105,12 @@ function Tables(props) {
     setOpen(false);
 
   };
+
+  useEffect(() => {
+		if(!token) {
+			window.location.href = '/login'
+		}
+	}, [token])
 
   return (
     <>

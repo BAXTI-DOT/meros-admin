@@ -2,7 +2,6 @@ import Category from "views/Category/TableList";
 import Subcategory from "views/Subcategory";
 import Subclass from "views/Subclass";
 import Products from "views/Products/Products";
-import UserProfile from "views/UserProfile";
 import Order from 'views/Orders/Order'
 import Filter from 'views/Filters/Filter'
 
@@ -47,13 +46,6 @@ var routes = [
     name: "Filters",
     icon: "tim-icons icon-align-center",
     component: Filter,
-    layout: "/admin",
-  },
-  {
-    path: "/user-profile",
-    name: "User Profile",
-    icon: "tim-icons icon-single-02",
-    component: UserProfile,
     layout: "/admin",
   }
 ];

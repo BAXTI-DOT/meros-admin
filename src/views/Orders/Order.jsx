@@ -84,10 +84,9 @@ function Order(props) {
         }
     }
 
-  // const handlePage = (e, v) => {
-  //   console.log(v)
-  //   setPage(v)
-  // }
+  useEffect(() => {
+    if(!token) window.location.href = '/login'
+  }, [token])
 
 return (
     <>

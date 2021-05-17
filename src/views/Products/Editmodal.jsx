@@ -64,8 +64,6 @@ function Editmodal({ editModal, classes, className, editToggle, productID, updat
         variables: { productID }
     })
 
-    console.log(editFilters)
-
     const { data: modalSubclass } = useQuery(SUBCLASSES, {
         variables: { categoryID: catID, subcategoryID: subID }
     })
@@ -104,7 +102,7 @@ function Editmodal({ editModal, classes, className, editToggle, productID, updat
     
         data.append("file", file)
     
-        axios.post("http://localhost:4000/uploadFile", data, {
+        axios.post("https://meros-master.herokuapp.com/uploadFile", data, {
           headers: {
             "Content-Type": "multipart/form-data",
           },

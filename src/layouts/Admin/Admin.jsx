@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Switch, Redirect, useLocation } from "react-router-dom";
 import PerfectScrollbar from "perfect-scrollbar";
 import AdminNavbar from "components/Navbars/AdminNavbar";
 import Sidebar from "components/Sidebar/Sidebar";
 import routes from "routes";
-
 import logo from "assets/img/react-logo.png";
 import { BackgroundColorContext } from "contexts/BackgroundColorContext";
 import { useLogin } from 'contexts/Auth'
@@ -16,6 +15,12 @@ function Admin() {
 	const mainPanelRef = React.useRef(null);
 
 	const [ token ] = useLogin()
+
+	useEffect(() => {
+		if(!token) {
+			window.location.href = '/login'
+		}
+	}, [token])
 	const [sidebarOpened, setsidebarOpened] = React.useState(
 		document.documentElement.className.indexOf("nav-open") !== -1
 		);

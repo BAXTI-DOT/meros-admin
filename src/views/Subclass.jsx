@@ -106,14 +106,14 @@ function Tables(props) {
     variables: { categoryID, subcategoryID }
   })
 
-  const [ add, { loading, error } ] = useMutation(ADD_SUBCLASS , {
+  const [ add, { error } ] = useMutation(ADD_SUBCLASS , {
     errorPolicy: "all",
     update: (cache, data) => {
       if(data) enqueueSnackbar('Subclass has successfully been added', { variant })
     }
   })
 
-  const [ deleteSubclass, { error: deleteError } ] = useMutation(DELETE_SUBCLASS, {
+  const [ deleteSubclass ] = useMutation(DELETE_SUBCLASS, {
     errorPolicy: "all",
     update: (cache, data) => {
       if(data) enqueueSnackbar('Subclass has successfully been deleted')
@@ -145,6 +145,13 @@ function Tables(props) {
       useEffect(() => {
         name.length <= 0 ? setDisabled(true) : setDisabled(false)
       }, [ name ])
+
+      
+  useEffect(() => {
+		if(!token) {
+			window.location.href = '/login'
+		}
+	}, [token])
       
   const toggle = () => {
     setModal(!modal)
@@ -185,11 +192,6 @@ function Tables(props) {
   const handleClose = () => {
     setOpen(false);
   };
-
-  if(deleteError) return <>deleteError</>
-  if(loading) return <>loading</>
-
-  if(!token) window.location.href = '/login'
 
   return (
     <>

@@ -168,7 +168,11 @@ function Tables(props) {
     setOpen(false);
   };
 
-  if(!token) window.location.href = '/login'
+  useEffect(() => {
+		if(!token) {
+			window.location.href = '/login'
+		}
+	}, [token])
 
   return (
     <>

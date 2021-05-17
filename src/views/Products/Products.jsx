@@ -154,6 +154,12 @@ function Tables(props) {
     setOpen(false);
   };
 
+  useEffect(() => {
+		if(!token) {
+			window.location.href = '/login'
+		}
+	}, [token])
+
 return (
     <>
       <div className="content">
