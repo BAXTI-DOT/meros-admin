@@ -48,8 +48,6 @@ export default function Auth(props) {
                 password
             }
         })
-
-        console.log(username, password)
     }
 
     if(token) return <Redirect to="/admin" />
