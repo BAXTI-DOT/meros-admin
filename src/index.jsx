@@ -26,7 +26,7 @@ const wsLink = () => {
 // Get the authentication token from local storage if it exists
 const token = localStorage.getItem('token');
 	return new WebSocketLink({
-			uri: `ws://meros-master.herokuapp.com/graphql`,
+			uri: `wss://meros-master.herokuapp.com/graphql`,
 			options: {
 			reconnect: true,
 			timeout: 30000,
